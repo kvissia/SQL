@@ -1,0 +1,25 @@
+create table inventory (id integer primary key, item text, quantity integer, price integer, aisle integer, sold_this_month integer);
+
+Insert into inventory values
+(1, "Blouses", 4, 25, 2, 13),
+(2, "Skirts", 8, 19, 4, 4),
+(3, "Jeans", 25, 45, 5, 20),
+(4, "Blazers", 15, 60, 2, 5),
+(5, "Leggings", 17, 20, 4, 12),
+(6, "Sweatshirts", 15, 50, 1, 23),
+(7, "Hoodies", 30, 55, 1, 25),
+(8, "Socks", 60, 3, 7, 40),
+(9, "Underwear", 56, 10, 7, 30),
+(10, "Suspenders", 5, 15, 7, 2),
+(11, "Shorts", 7, 18, 4, 3),
+(12, "Sundresses", 13, 23, 6, 8),
+(13, "T-Shirts", 7, 16, 5, 7),
+(14, "Bras", 18, 40, 8, 12),
+(15, "Tank Tops", 6, 25, 2, 4);
+
+select * from inventory;
+select * from inventory order by price;
+select * from inventory order by sold_this_month desc;
+select sum(sold_this_month) from inventory;
+select item, (sold_this_month*price) from inventory order by (sold_this_month*price) desc;
+select sum(sold_this_month*price) from inventory;
