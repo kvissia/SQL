@@ -1,0 +1,93 @@
+create table people (id integer primary key autoincrement, fullname text, type text);
+
+insert into people (fullname, type) values
+("Dwayne Johnson", "actor"),
+("Chris Rock", "comedian"),
+("Will Smith", "actor"),
+("Katy Perry", "singer"),
+("Meryl Streep", "actor"),
+("Elvis", "singer"),
+("Chris Deliah", "comedian"),
+("Adele", "singer"),
+("Joe Jonas", "singer"),
+("Shawn Mendes", "singer"),
+("Justin Bieber", "singer"),
+("Ryan Reynolds", "actor"),
+("Ashton Kutcher", "actor"),
+("Mila Kunis", "actor"),
+("Blake Lively", "actor"),
+("Beyonce", "singer"),
+("Jay-Z", "singer"),
+("Kristen Bell", "actor"),
+("Dax Shepard", "actor"),
+("Celine Dion", "singer"),
+("Keanu Reaves", "actor");
+
+
+create table married (id integer primary key autoincrement, personid_1 integer, personid_2 integer);
+
+insert into married (personid_1, personid_2) values
+(12,15),
+(13,14),
+(16,17),
+(18,19);
+
+create table oscars (id integer primary key autoincrement, personid integer, oscar_won text);
+
+insert into oscars (personid, oscar_won) values
+(21, "no"),
+(19, "no"),
+(18, "no"),
+(15, "no"),
+(14, "no"),
+(13, "no"),
+(12, "no"),
+(5, "yes"),
+(3, "yes"),
+(1, "no");
+
+create table where_from (id integer primary key autoincrement, personid integer, country text);
+
+insert into where_from (personid, country) values
+(1, "USA"),
+(2, "USA"),
+(3, "USA"),
+(4, "USA"),
+(5, "USA"),
+(6, "USA"),
+(7, "USA"),
+(8, "UK"),
+(9, "USA"),
+(10, "Canada"),
+(11, "Canada"),
+(12, "Canada"),
+(13, "USA"),
+(14, "Ukraine"),
+(15, "USA"),
+(16, "USA"),
+(17, "USA"),
+(18, "USA"),
+(19, "USA"),
+(20, "Canada"),
+(21, "Canada");
+
+select people.fullname, oscars.oscar_won from people
+left outer join oscars
+on oscars.personid = people.id
+order by oscar_won desc;
+
+select a.fullname, b.fullname as spouse from married
+join people a
+on married.personid_1 = a.id
+join people b
+on married.personid_2 = b.id;
+
+select a.fullname, c.country, b.fullname as spouse, d.country as spouses_country from married
+join people a
+on married.personid_1 = a.id
+join people b
+on married.personid_2 = b.id
+join where_from c
+on a.id = c.personid
+join where_from d
+on b.id = d.personid;
